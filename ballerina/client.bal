@@ -464,7 +464,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Information about the currently playing track 
-    remote isolated function getCurrentlyPlaying(map<string|string[]> headers = {}, *GetCurrentlyPlayingQueries queries) returns CurrentlyPlayingContextObject|error {
+    remote isolated function getCurrentlyPlaying(map<string|string[]> headers = {}, *GetCurrentlyPlayingQueries queries) returns CurrentlyPlayingContextObject|error? {
         string resourcePath = string `/me/player/currently-playing`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);

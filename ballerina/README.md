@@ -48,19 +48,21 @@ To use the Spotify connector, you need a Spotify account and an app registered i
 
 4. Copy the `refresh_token` from the response. The connector uses it to obtain new access tokens automatically.
 
+> **Note**: Refresh tokens for apps created in the Spotify Developer Dashboard expire six months after the user authorizes the app. Refreshing access tokens does not extend this period. Once the refresh token expires, token requests fail with an `invalid_grant` error, and the user must go through the authorization flow above again to obtain a new refresh token for the connector.
+
 > **Note**: Endpoints that read or change user data need a token granted by that user through this flow. Alternatively, a short-lived access token can be passed with the `token` field of the connector's bearer-token configuration.
 
 ## Quickstart
 
 To use the Spotify connector in your Ballerina application, modify the `.bal` file as follows.
 
-#### Step 1: Import the connector
+### Step 1: Import the connector
 
 ```ballerina
 import ballerinax/spotify;
 ```
 
-#### Step 2: Create a new connector instance
+### Step 2: Create a new connector instance
 
 Create a `Config.toml` file with your credentials.
 
@@ -82,7 +84,7 @@ spotify:Client spotify = check new ({
 });
 ```
 
-#### Step 3: Invoke the connector operation
+### Step 3: Invoke the connector operation
 
 Fetch a track from the Spotify catalogue.
 
@@ -92,7 +94,7 @@ public function main() returns error? {
 }
 ```
 
-#### Step 4: Run the Ballerina application
+### Step 4: Run the Ballerina application
 
 ```bash
 bal run
